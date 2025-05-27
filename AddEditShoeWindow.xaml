@@ -1,0 +1,53 @@
+﻿<Window x:Class="ShoesFactory.AddEditShoeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShoesFactory"
+        mc:Ignorable="d"
+        Title="Додати/Редагувати Взуття" Height="700" Width="450" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFEEC9EF" Offset="0.006"/>
+                <GradientStop Color="#FFD547E2" Offset="1"/>
+                <GradientStop Color="#FED4A9D5" Offset="0.512"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel Margin="20">
+            <Label Content="Артикул (Д/Ч/П):" Margin="0,10,0,0" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="ArticleTextBox" Height="41" Padding="5" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1"/>
+
+            <Label Content="Назва моделі:" Margin="0,10,0,0" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="ModelNameTextBox" Height="41" Padding="5" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1"/>
+
+            <Label Content="Розмір:" Margin="0,10,0,0" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="SizeTextBox" Height="41" Padding="5" PreviewTextInput="NumberValidationTextBox" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1"/>
+
+            <Label Content="Кількість на складі:" Margin="0,10,0,0" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="QuantityTextBox" Height="41" Padding="5" PreviewTextInput="NumberValidationTextBox" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1"/>
+
+            <Label Content="Ціна:" Margin="0,10,0,0" FontSize="18" FontFamily="Arial Black"/>
+            <TextBox x:Name="PriceTextBox" Height="41" Padding="5" PreviewTextInput="DecimalValidationTextBox" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1"/>
+
+            <Button x:Name="SaveButton" Content="Зберегти" Click="SaveButton_Click" Margin="0,20,0,0" Height="35"
+                    Background="#FFD547E2" Foreground="White" FontWeight="Bold" FontSize="18" FontFamily="Arial Black"
+                    BorderBrush="#FFC481D5" BorderThickness="1" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Скасувати" Click="CancelButton_Click" Margin="0,10,0,0" Height="35"
+                    Background="#FFDC3545" Foreground="White" FontWeight="Bold" FontSize="18" FontFamily="Arial Black"
+                    BorderBrush="#FFC82333" BorderThickness="1" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

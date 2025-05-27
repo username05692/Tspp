@@ -1,0 +1,123 @@
+﻿<Window x:Class="ShoesFactory.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShoesFactory"
+        mc:Ignorable="d"
+        Title="Взуттєва фірма 'Чобіток'" Height="700" Width="1000" SizeToContent="Manual">
+
+    <Window.Resources>
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Background" Value="#FFD547E2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="#FFC481D5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFB060D0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Background" Value="#FFDC3545"/>
+            <Setter Property="BorderBrush" Value="#FFC82333"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFC82333"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFEEC9EF" Offset="0.006"/>
+                <GradientStop Color="#FFD547E2" Offset="1"/>
+                <GradientStop Color="#FED4A9D5" Offset="0.512"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10"
+                Background="#FFC481D5" CornerRadius="5" BorderThickness="1">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF030303" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Label Content="Взуттєва фірма &quot;Чобіток&quot;" FontSize="28" FontFamily="Arial Black" Foreground="#FF1C1717" FontWeight="Bold"
+                   Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <DataGrid x:Name="ShoesDataGrid" Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True"
+                  AlternatingRowBackground="#F0F0F0" RowBackground="White"
+                  BorderBrush="Black" BorderThickness="1" HeadersVisibility="Column"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False"
+                  SelectionMode="Single" Margin="10">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FFD547E2"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="BorderBrush" Value="#FFC481D5"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                    <Setter Property="FontFamily" Value="Arial Black"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="BorderBrush" Value="LightGray"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Артикул" Binding="{Binding Article}" Width="*"/>
+                <DataGridTextColumn Header="Модель" Binding="{Binding ModelName}" Width="*"/>
+                <DataGridTextColumn Header="Розмір" Binding="{Binding Size}" Width="*"/>
+                <DataGridTextColumn Header="Кількість" Binding="{Binding QuantityInStock}" Width="*"/>
+                <DataGridTextColumn Header="Ціна" Binding="{Binding Price, StringFormat='C2'}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <Button x:Name="AddShoeButton" Content="Додати" Click="AddShoe_Click" Margin="0,0,0,10" Style="{StaticResource ActionButtonStyle}"/>
+            <Button x:Name="EditShoeButton" Content="Редагувати" Click="EditShoe_Click" Margin="0,0,0,20" Style="{StaticResource ActionButtonStyle}"/>
+
+            <Label Content="Пошук (модель/артикул):" FontSize="16" FontFamily="Arial Black" Margin="0,0,0,5"/>
+            <TextBox x:Name="SearchTextBox" Height="30" Padding="5" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1"/>
+
+            <Label Content="Пошук (розмір):" FontSize="16" FontFamily="Arial Black" Margin="0,10,0,5"/>
+            <TextBox x:Name="SizeSearchTextBox" Height="30" Padding="5" Background="#FFD7B0DE" BorderBrush="Black" BorderThickness="1" PreviewTextInput="NumberValidationTextBox"/>
+
+            <Button Content="Шукати" Click="FilterButton_Click" Margin="0,10,0,5" Style="{StaticResource ActionButtonStyle}"/>
+            <Button Content="Очистити фільтр" Click="ClearFilterButton_Click" Margin="0,0,0,20" Style="{StaticResource DangerButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</Window>
